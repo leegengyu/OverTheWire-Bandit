@@ -170,7 +170,7 @@ The credentials for the next level can be retrieved by submitting the password o
 * Command 4: ssh -i <SSH key filename> bandit17@localhost
 * Password for Level 17: unknown at this point in time (use command to log into Level 17's server)
 
-**Bandit Level 17 → Level 18**
+**Bandit Level 17 → Level 18**  
 **Key Takeaways**: learn how to compare the contents of 2 files, using the diff command.  
 There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new.  
 NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19.
@@ -178,3 +178,12 @@ NOTE: if you have solved this level and see ‘Byebye!’ when trying to log int
 * Note: The output of the diff command is dependent on the order of the parameters supplied to the command. If passwords.new is the second parameter, the second string that is printed in the output is the password for the next level.
 * Password for Level 17: xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn (execute more /etc/bandit_pass/bandit17)
 * Password for Level 18: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+
+**Bandit Level 18 → Level 19**  
+**Key Takeaways**: learn how to log in to a server via SSH without running .bash files (e.g. .bashrc and .bash_logout), using the ssh command with a set of parameters.  
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+* Command to log in to this level: ssh bandit18@bandit.labs.overthewire.org -p 2220 -t /bin/sh
+* Note: -t parameter in the command forces pseudo-terminal allocation. /bin/sh is another kind of Unix shell. Thus, this command runs /bin/sh (*not entirely sure if .bash files are executed, and then /bin/sh is executed, or the case where the .bash files are never executed, or some other case*), preventing us from being logged out immediately upon a successful login.
+* Note: Upon successful login, we observe that each line begins with only a '$' symbol without any prefix such as the green-coloured "bandit18@bandit: $" which we would expect. The wall of welcome text by OverTheWire is also missing. These differences are due to .bash files not running because of the customised ssh command with the stated parameters.
+* Note: In this case, the last 2 lines in .bashrc is responsible for logging the user out immediately upon successful login.
+* Password for Level 19: IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
