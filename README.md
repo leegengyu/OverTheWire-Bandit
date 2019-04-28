@@ -5,14 +5,16 @@ This repository serves as:
 1) Documentation of my methods and thought process as I solve the Bandit level challenges from OverTheWire wargames.
 2) Revision guide based on the key takeaways from solving each challenge.
 
-Level Goal
-Key Takeaways
-Alternatives
-Misconception
+Each level of the walkthrough guide summarises the:
+1) Level Goal (taken verbatim from <insert link to OverTheWire page>)
+2) Key Takeaways
+3) Alternatives (if any)
+4) Common misconceptions (if any)
 
 # Walkthrough Guide
 Bandit Level 0 → Level 1
 The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
+* Key Takeaways: learning how to log into a server using SSH from a command-line terminal.
 bandit0 - readme - boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
 Bandit Level 1 → Level 2
@@ -69,4 +71,4 @@ bandit11 data.txt 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 
 Bandit Level 12 → Level 13
 The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
-bandit12 data8.tar 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL [must try again]
+bandit12 data8.tar 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
