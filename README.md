@@ -11,22 +11,24 @@ Each level of the walkthrough guide summarises the:
 3) Alternatives (if any)
 4) Common misconceptions (if any)
 
+**Tip**: For those using the Windows Command Prompt to ssh into each level's server, you can right-click on the cmd after copying the password unlocked from the previous level. The right-click pastes the password which was copied. Using the normal shortcut keys to paste (CTRL+V or SHIFT+INSERT) did not work for me.
+
 # Walkthrough Guide
 **Bandit Level 0 → Level 1**  
 The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.  
+* Key Takeaways: learning how to log into a server using SSH from a command-line terminal.  
 File: readme  
-Password for Level 1: boJ9jbbUNNfktd78OOpsqOltutMc3MY1  
-* Key Takeaways: learning how to log into a server using SSH from a command-line terminal.
+Password for Level 1: boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
 **Bandit Level 1 → Level 2**  
 The password for the next level is stored in a file called - located in the home directory.  
+* Key Takeaways: learning how to read files with special characters, which is "-" in this case.  
 File: -  
 Password for Level 2: CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9  
-* Key Takeaways: learning how to read files with special characters, which is "-" in this case.
 
 **Bandit Level 2 → Level 3**  
 The password for the next level is stored in a file called spaces in this filename located in the home directory.  
-* Key Takeaways: learning how to read files with spaces in its file name.
+* Key Takeaways: learning how to read files with spaces in its file name.  
 File: spaces in this filename  
 Password for Level 3: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK  
 * Command: cat spaces\ in\ this\ filename  
@@ -34,11 +36,15 @@ Password for Level 3: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
 **Bandit Level 3 → Level 4**  
 The password for the next level is stored in a hidden file in the inhere directory.  
+* Key Takeaways: learning how to see all files in a directory, by using the -a (--all) argument to the ls command.  
 File: .hidden  
 Password for Level 4: pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 
 **Bandit Level 4 → Level 5**  
 The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.  
+* Key Takeaways: learning how to discover the type of a file, by using the file command.  
+* Command: file ./-file*  
+* Note: human-readable file means a file with only ASCII text in this context.  
 File: -file07  
 Password for Level 5: koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
@@ -47,6 +53,11 @@ The password for the next level is stored in a file somewhere under the inhere d
 * human-readable
 * 1033 bytes in size
 * not executable  
+* Key Takeaways: learning how to find a targeted file given a set of properties, by using the find command.  
+* Command: find -type f -readable ! -executable -size 1033c  
+* Alternative: find -size 1033c (go straight for the most distinguishing property out of all the ones listed; this works in this context only because there was only 1 file which was 1033 bytes in size)  
+* Note: suffix 'c' is found after 1033 to specify the units to be bytes. The command will not work if no units were stated.
+* Note: optional to include a '.' (dot) after the find command and before specifying the type, to indicate that all directories and files are being searched.  
 File: maybehere07/.file2  
 Password for Level 6: DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 
