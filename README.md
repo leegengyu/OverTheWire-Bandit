@@ -129,3 +129,11 @@ The password for the next level is stored in the file data.txt, which is a hexdu
 * Step 11: file data8.tar shows us that the file contains only ASCII text, which is the password to the next level.
 * File: data8.tar
 * Password for Level 13: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+**Bandit Level 13 → Level 14**  
+**Key Takeaways**: learn how to log in to a server using a SSH (RSA) private key.  
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.  
+* Command: ssh -i sshkey.private bandit14@localhost
+* Note: If I am not wrong, finding the IP address of localhost would require the execution of ifconfig, which is not found on the server. Thus, in place of knowing and using the localhost IP address, we can simply use the hostname itself.
+* File: sshkey.private
+* Password for Level 14: above command
