@@ -169,3 +169,12 @@ The credentials for the next level can be retrieved by submitting the password o
 * Note: Command 3 sets the permissions of the key file to be readable only by the owner of the file (which is bandit16). Without changing the permissions of the SSH key file will result in the private key being ignored, because the server deems that the permissions for the file are too open, and requires that the file is not accessible to others.
 * Command 4: ssh -i <SSH key filename> bandit17@localhost
 * Password for Level 17: unknown at this point in time (use command to log into Level 17's server)
+
+**Bandit Level 17 → Level 18**
+**Key Takeaways**: learn how to compare the contents of 2 files, using the diff command.  
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new.  
+NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19.
+* Command: diff passwords.old passwords.new
+* Note: The output of the diff command is dependent on the order of the parameters supplied to the command. If passwords.new is the second parameter, the second string that is printed in the output is the password for the next level.
+* Password for Level 17: xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn (execute more /etc/bandit_pass/bandit17)
+* Password for Level 18: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
