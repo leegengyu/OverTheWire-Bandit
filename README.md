@@ -134,6 +134,7 @@ The password for the next level is stored in the file data.txt, which is a hexdu
 **Key Takeaways**: learn how to log in to a server using a SSH (RSA) private key, using the ssh command.  
 The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.  
 * Command: ssh -i sshkey.private bandit14@localhost
+* Note: -i parameter of ssh is referring to an identity file, from which the identity key (private key) for authentication is read.
 * Note: If I am not wrong, finding the IP address of localhost would require the execution of ifconfig, which is not found on the server. Thus, in place of knowing and using the localhost IP address, we can simply use the hostname itself.
 * File: sshkey.private
 * Password for Level 14: unknown at this point in time (use command to log into Level 14's server)
@@ -151,7 +152,20 @@ The password for the next level can be retrieved by submitting the password of t
 **Key Takeaways**: learn how to send data to another host using SSL encryption, using the openssl and s_client commands.  
 The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.  
 Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…
-* Command: openssl s_client -connect localhost:30001
+* Command: openssl s_client -connect localhost:30001, BfMYroe26WYalil77FoDi9qh59eK5xNr
 * Note: **Not sure what the helpful note given is referring to**.
 * Note: Sending the password of the current level using the telnet command results in the connecting host closing its connection immediately.
 * Password for Level 16: cluFn7wTiGryunymYOu4RcffSxQluehd
+
+**Bandit Level 16 → Level 17**  
+**Key Takeaways**: learn how to identify listening ports within a server, using the nmap, openssl and s_client command.  
+The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.  
+* Command 1: nmap -A -p 31000-32000 localhost
+* Note: -A parameter to nmap enables OS and version detection, script scanning, and traceroute.
+* Note/Alternative: Executing nmap -p 31000-32000 localhost alone will show that only 1 TCP port, numbered 31790 is open and running unknown service. Run the same command with the -A parameter to confirm that the port speaks SSL. **Need to specify scan type used? e.g. -ST for TCP connect scan**
+* Command 2: openssl s_client -connect localhost:31790, cluFn7wTiGryunymYOu4RcffSxQluehd
+* Note: SSH (RSA) private key for next level is given from the SSL connection. Copy and paste the key into a file created in /tmp directory.
+* Command 3: chmod 400 <SSH key filename>
+* Note: Command 3 sets the permissions of the key file to be readable only by the owner of the file (which is bandit16). Without changing the permissions of the SSH key file will result in the private key being ignored, because the server deems that the permissions for the file are too open, and requires that the file is not accessible to others.
+* Command 4: ssh -i <SSH key filename> bandit17@localhost
+* Password for Level 17: unknown at this point in time (use command to log into Level 17's server)
