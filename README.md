@@ -146,3 +146,12 @@ The password for the next level can be retrieved by submitting the password of t
 * Password for Level 14: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
 * Note: Telnet connection will be closed by host after 1 try of the password.
 * Password for Level 15: BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+**Bandit Level 15 → Level 16**  
+**Key Takeaways**: learn how to send data to another host using SSL encryption, using the openssl and s_client commands.  
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.  
+Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…
+* Command: openssl s_client -connect localhost:30001
+* Note: **Not sure what the helpful note given is referring to**.
+* Note: Sending the password of the current level using the telnet command results in the connecting host closing its connection immediately.
+* Password for Level 16: cluFn7wTiGryunymYOu4RcffSxQluehd
