@@ -51,57 +51,60 @@ The password for the next level is stored in the only human-readable file in the
 **Bandit Level 5 → Level 6**  
 **Key Takeaways**: learn how to find a targeted file given a set of properties, by using the find command.  
 The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
-human-readable
-1033 bytes in size
-not executable
+human-readable  
+1033 bytes in size  
+not executable  
 * Command: find -type f -readable ! -executable -size 1033c  
 * Alternative: find -size 1033c (go straight for the most distinguishing property out of all the ones listed; this works in this context only because there was only 1 file which was 1033 bytes in size)  
 * Note: suffix 'c' is found after 1033 to specify the units to be bytes. The command will not work if no units were stated.
 * Note: optional to include a '.' (dot) after the find command and before specifying the type, to indicate that all directories and files are being searched.  
-* File: maybehere07/.file2  
+* Additional practice: learn how to find files of size greater than or less than a given size.
+* File: maybehere07/.file2
 * Password for Level 6: DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 
 **Bandit Level 6 → Level 7**  
-**Key Takeaways**: learn how to 
+**Key Takeaways**: learn how to .  
 The password for the next level is stored somewhere on the server and has all of the following properties:
-owned by user bandit7
-owned by group bandit6
-33 bytes in size  
+owned by user bandit7  
+owned by group bandit6  
+33 bytes in size
+* Note: Since it is stated that the password is stored somewhere on the server, we must first navigate to the root folder. cd .. twice from the home directory, and then pwd to verify that we are in the root directory. We should only see the slash ('/') character from running pwd.
+* Command: find -user bandit7 -group bandit6 -size 33c
 * File: ./var/lib/dpkg/info/bandit7.password
 * Password for Level 7: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 
 **Bandit Level 7 → Level 8**  
-**Key Takeaways**: learn how to 
+**Key Takeaways**: learn how to .  
 The password for the next level is stored in the file data.txt next to the word millionth.  
 * File: data.txt  
 * Password for Level 8: cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 
 **Bandit Level 8 → Level 9**  
-**Key Takeaways**: learn how to 
+**Key Takeaways**: learn how to .  
 The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.  
 * File: data.txt  
 * Password for Level 9: UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 
 **Bandit Level 9 → Level 10**   
-**Key Takeaways**: learn how to 
+**Key Takeaways**: learn how to .  
 The password for the next level is stored in the file data.txt in one of the few human-readable strings, beginning with several ‘=’ characters.  
 * File: data.txt  
 * Password for Level 10: truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
 
 **Bandit Level 10 → Level 11**  
-**Key Takeaways**: learn how to 
+**Key Takeaways**: learn how to .  
 The password for the next level is stored in the file data.txt, which contains base64 encoded data.  
 File: data.txt  
 Password for Level 11: IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 
 **Bandit Level 11 → Level 12**  
-**Key Takeaways**: learn how to 
+**Key Takeaways**: learn how to .  
 The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.  
 * File: data.txt  
 * Password for Level 12: 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 
 **Bandit Level 12 → Level 13**  
-**Key Takeaways**: learn how to 
+**Key Takeaways**: learn how to .  
 The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!).  
 * File: data8.tar  
 * Password for Level 13: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
