@@ -14,22 +14,22 @@ Each level of the walkthrough guide summarises the:
 # Walkthrough Guide
 Bandit Level 0 → Level 1
 The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
-* Key Takeaways: learning how to log into a server using SSH from a command-line terminal.
+* Key Takeaways: learning how to log into a server using SSH from a command-line terminal.  
 bandit0 - readme - boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
-Bandit Level 1 → Level 2
+Bandit Level 1 → Level 2  
 The password for the next level is stored in a file called - located in the home directory.
 bandit1 - - - CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 
-Bandit Level 2 → Level 3
+Bandit Level 2 → Level 3  
 The password for the next level is stored in a file called spaces in this filename located in the home directory.
 bandit2 spaces in this filename UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
-Bandit Level 3 → Level 4
+Bandit Level 3 → Level 4  
 The password for the next level is stored in a hidden file in the inhere directory.
 bandit3 .hidden pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 
-Bandit Level 4 → Level 5
+Bandit Level 4 → Level 5  
 The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
 bandit4 -file07 koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
