@@ -114,7 +114,7 @@ The password for the next level is stored in the file data.txt, where all lowerc
 * Password for Level 12: 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 
 **Bandit Level 12 → Level 13**  
-**Key Takeaways**: learn how to .  
+**Key Takeaways**: learn how to convert hexdump files and extract compressed files, using the xxd and various (de)compression utility commands respectively.  
 The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!).  
 * Step 1: First, make a new directory of your choice under /tmp. Next, copy data.txt to this new directory. There is no need to rename it in my opinion since I felt that I had to remember one more different file name to keep track of where I started.
 * Step 2: The file command would state data.txt as a file with ASCII text, but if you view the file contents, it is actually a hex dump. Command to convert the hexdump into binary: xxd -r data.txt > newdata.txt
@@ -131,9 +131,18 @@ The password for the next level is stored in the file data.txt, which is a hexdu
 * Password for Level 13: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 
 **Bandit Level 13 → Level 14**  
-**Key Takeaways**: learn how to log in to a server using a SSH (RSA) private key.  
+**Key Takeaways**: learn how to log in to a server using a SSH (RSA) private key, using the ssh command.  
 The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.  
 * Command: ssh -i sshkey.private bandit14@localhost
 * Note: If I am not wrong, finding the IP address of localhost would require the execution of ifconfig, which is not found on the server. Thus, in place of knowing and using the localhost IP address, we can simply use the hostname itself.
 * File: sshkey.private
-* Password for Level 14: above command
+* Password for Level 14: unknown at this point in time (use command to log into Level 14's server)
+
+**Bandit Level 14 → Level 15**  
+**Key Takeaways**: learn how to send data to another host, using the telnet command.  
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.  
+* Command: telnet localhost 30000, 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+* Note: As mentioned in the previous level, the password for this level is stored in /etc/bandit_pass/bandit14.
+* Password for Level 14: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+* Note: Telnet connection will be closed by host after 1 try of the password.
+* Password for Level 15: BfMYroe26WYalil77FoDi9qh59eK5xNr
