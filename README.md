@@ -194,3 +194,24 @@ To gain access to the next level, you should use the setuid binary in the homedi
 * Command: ./bandit20-do cat /etc/bandit_pass/bandit20
 * Note: Executing file bandit20-do shows us that the file is a setuid ELF 32-bit LSB executable. Running the command allows us to take on the role of user bandit20 temporarily, because of the setuid (set user ID) executable.
 * Password for Level 20: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+
+**Bandit Level 20 → Level 21**  
+**Key Takeaways**: learn how to open a listening port and communicate using it, using the nc command.  
+There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).  
+NOTE: Try connecting to your own network daemon to see if it works as you think.
+* Command: nc -z -v localhost 1-50000 (to find out what are the ports that are currently open)
+* From the command, 7 ports are shown to be open. They are port number 22, 113, 30000, 30001, 30002, 30003 and 31790.
+* Command (on terminal A): nc -l -p 1234, GbKksEFF4yrVs6il55v6gwY5aVje5f0j 
+* Note: -l flag means listen mode.
+* Note: Any other port number besides 1234 can be used, so long as the number is not an existing port which was already shown to be open (i.e. not one of the 7 listed ones above).
+* Optional command (on terminal B): nc -z -v localhost 1234 (to test that the port 1234 had indeed been opened and is listening; However, if this command is used, then the listening side will end the connection after that and the command on terminal A has to be executed again)
+* Command (on terminal B): ./suconnect 1234
+* The password for Level 21 will then be printed on terminal B.
+* I was initially confused by the level goal's description of "It then reads a line of text", thinking that reading a line of text is from the user input into the suconnect application.
+* **How this entire level actually works**: open a listening port of our choice and send level 20's password to the suconnect, who will verify that the current level's password is correct, before the setuid bit kicks in and permissions are temporarily elevated to user bandit21 to obtain the next level's password.
+* Note: Port scanning done using nc done at different points in time resulted in additional ports being shown to be open. These ports' are normally in the 35000 to 40000+ range, and appear to be open only momentarily for some reason(?).
+* Note: -z means that the zero-I/O mode is used, i.e. nc only does scanning. -v means verbose.
+* Note: Running the same command without the -v flag returns us no results at all.
+* Note: Running the same command without specifying a range of ports results in a result stating that there are no ports to connect to. I think that only some common ports are scanned if no specific range is specified by the user.
+* Note: The man page states that the use of the -v flag twice means more verbose. This actually means that the result of each individual port's scan is printed. Having only one -v flag results in only open port results being printed.
+* Password for Level 21: gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
