@@ -215,3 +215,11 @@ NOTE: Try connecting to your own network daemon to see if it works as you think.
 * Note: Running the same command without specifying a range of ports results in a result stating that there are no ports to connect to. I think that only some common ports are scanned if no specific range is specified by the user.
 * Note: The man page states that the use of the -v flag twice means more verbose. This actually means that the result of each individual port's scan is printed. Having only one -v flag results in only open port results being printed.
 * Password for Level 21: gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+
+**Bandit Level 21 → Level 22**  
+**Key Takeaways**: learn how to read shell scripts that form part of a cron job.  
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+* First, navigate to /etc/cron.d as mentioned, and we can see that there are 3 cronjobs for the next 3 levels respectively. These are ASCII text files.
+* Open cronjob_bandit22 since it is the next level that we are tackling. We find that there is a shell script within /usr/bin that redirects its output to /dev/null, a null device that discards the information written to it.
+* Open cronjob_bandit22.sh in /usr/bin and we find that the password to the next level has been also placed into a file t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv at /tmp, in addition to the usual location at /etc/bandit_pass where all the passwords are found.
+* Password for Level 22: Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
