@@ -223,3 +223,13 @@ A program is running automatically at regular intervals from cron, the time-base
 * Open cronjob_bandit22 since it is the next level that we are tackling. We find that there is a shell script within /usr/bin that redirects its output to /dev/null, a null device that discards the information written to it.
 * Open cronjob_bandit22.sh in /usr/bin and we find that the password to the next level has been also placed into a file t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv at /tmp, in addition to the usual location at /etc/bandit_pass where all the passwords are found.
 * Password for Level 22: Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+
+**Bandit Level 22 → Level 23**  
+**Key Takeaways**: learn how to read shell scripts that form part of a cron job.  
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.  
+NOTE: Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.
+* This level is very similar to the previous level, except that the shell scripts are slightly less easy than the one found in the previous level.
+* First, navigate to /etc/cron.d as mentioned and open cronjob_bandit23.
+* Next, open cronjob_bandit23.sh in /usr/bin. From the shell script, we observe that the destination of the copying of password file is /tmp/$mytarget, where $mytarget is a variable.
+* We know that the folder that holds the copy of the password file is fixed as /tmp, but the file name is the MD5 sum of the string "I am user bandit22", minus the space and dash characters at the end (not actually sure how the dash character came about during the hashing). This MD5 sum is 8169b67bd894ddbb4412f91573b38db3.
+* Password for Level 23: jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
