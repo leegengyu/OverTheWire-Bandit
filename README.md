@@ -229,10 +229,9 @@ A program is running automatically at regular intervals from cron, the time-base
 * Password for Level 22: Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 
 **Bandit Level 22 → Level 23**  
-**Key Takeaways**: learn how to read shell scripts that form part of a cron job.  
+**Key Takeaways**: learn how to modify shell scripts that form part of a cron job.  
 A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.  
 NOTE: Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.
-* This level is very similar to the previous level, except that the shell scripts are slightly less easy than the one found in the previous level.
 * First, navigate to /etc/cron.d as mentioned and open cronjob_bandit23.
 * Next, open cronjob_bandit23.sh in /usr/bin. From the shell script, we observe that the destination of the copying of password file is /tmp/$mytarget, where $mytarget is a variable.
 * We know that the folder that holds the copy of the password file is fixed as /tmp, but the file name is the MD5 sum of the string "I am user bandit22", minus the space and dash characters at the end (not actually sure how the dash character came about during the hashing).
@@ -240,3 +239,11 @@ NOTE: Looking at shell scripts written by other people is a very useful skill. T
 * Thus, we copy the shell script contents to a self-created folder in /tmp, and modify $myname to bandit23. Save the file, change the permissions of the shell script to be executable for us, and then run the script.
 * The MD5 sum is 8ca319486bfbbc3663ea0fbe81326349. Open /tmp/8ca319486bfbbc3663ea0fbe81326349 to get our password for the next level.
 * Password for Level 23: jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
+
+**Bandit Level 23 → Level 24**  
+**Key Takeaways**: learn how to modify shell scripts that form part of a cron job.  
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.  
+NOTE: This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!  
+NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to keep a copy around...
+* 
+* Password for Level 24: 
