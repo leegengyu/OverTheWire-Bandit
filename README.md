@@ -241,9 +241,20 @@ NOTE: Looking at shell scripts written by other people is a very useful skill. T
 * Password for Level 23: jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
 
 **Bandit Level 23 → Level 24**  
-**Key Takeaways**: learn how to modify shell scripts that form part of a cron job.  
+**Key Takeaways**: learn how to insert a shell script into an existing cron job.  
 A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.  
 NOTE: This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!  
 NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to keep a copy around...
-* 
-* Password for Level 24: 
+* First, navigate to /etc/cron.d as mentioned and open cronjob_bandit24.
+* Next, open cronjob_bandit24.sh in /usr/bin. From the shell script, we observe that what the script does is to execute and delete all scripts in /var/spool/bandit24 at every interval. (Because the level guide said that we had to "create" our first shell script, I thought that I had to fiddle with this one, but boy was I wrong - see below.)
+* This is the **crucial** part that I had to understand - we could make use of this script to put in our own script which copies the password from /etc/bandit_pass to a directory of our choice.
+* Thus, create a shell script in a directory of your choice under /tmp. Similar to Level 22, the idea is that we copy the password file from /etc/bandit_pass to our own directory, but with the help of a cron job. While it does technically count as creating your own shell script, I do not really think that that counts, because the script is virtually the same as the one used in the previous level.
+* There are only 2 lines required in the script we create: #!/bin/bash and cat /etc/bandit_pass/bandit24 > /tmp/<your_directory>/<your_file_name>. All of the other lines are redundant - we do not actually require the print statement (which is only for debugging and learning purposes) nor the variables.
+* Copy this shell script to /var/spool/bandit24.
+* Sit back and wait for a few minutes.
+* The password is now sitting in /tmp/<your_directory>/<your_file_name>.
+* Note: Using the same method of modifying $myname in Level 22 will not work. After the file has been copied to the /tmp directory, opening the file will not give the password, but "Yeah, that isn't going to work.  t. lucid" instead. I'm not sure how they made this message appear instead.
+* I modified $myname to bandit25 and I got the password for Level 25. I guess the mechanism blocked the password for Level 24 from being revealed this way but not for other levels.
+* In summary: Create a shell script that suits our purpose, and let this script be executed by the other user. Thus we have inserted ourselves into the cron job of the other user and hyjacked their permissions in such a way. 
+* This was one of those levels that was really an eye-opener for me!
+* Password for Level 24: UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
