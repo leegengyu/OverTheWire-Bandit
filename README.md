@@ -235,5 +235,8 @@ NOTE: Looking at shell scripts written by other people is a very useful skill. T
 * This level is very similar to the previous level, except that the shell scripts are slightly less easy than the one found in the previous level.
 * First, navigate to /etc/cron.d as mentioned and open cronjob_bandit23.
 * Next, open cronjob_bandit23.sh in /usr/bin. From the shell script, we observe that the destination of the copying of password file is /tmp/$mytarget, where $mytarget is a variable.
-* We know that the folder that holds the copy of the password file is fixed as /tmp, but the file name is the MD5 sum of the string "I am user bandit22", minus the space and dash characters at the end (not actually sure how the dash character came about during the hashing). This MD5 sum is 8169b67bd894ddbb4412f91573b38db3.
+* We know that the folder that holds the copy of the password file is fixed as /tmp, but the file name is the MD5 sum of the string "I am user bandit22", minus the space and dash characters at the end (not actually sure how the dash character came about during the hashing).
+* However, this means that we are obtaining the password for the same level, bandit22. We want the password to the next level, bandit23.
+* Thus, we copy the shell script contents to a self-created folder in /tmp, and modify $myname to bandit23. Save the file, change the permissions of the shell script to be executable for us, and then run the script.
+* The MD5 sum is 8ca319486bfbbc3663ea0fbe81326349. Open /tmp/8ca319486bfbbc3663ea0fbe81326349 to get our password for the next level.
 * Password for Level 23: jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
