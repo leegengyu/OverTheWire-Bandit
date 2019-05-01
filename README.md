@@ -219,9 +219,13 @@ NOTE: Try connecting to your own network daemon to see if it works as you think.
 **Bandit Level 21 → Level 22**  
 **Key Takeaways**: learn how to read shell scripts that form part of a cron job.  
 A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
-* First, navigate to /etc/cron.d as mentioned, and we can see that there are 3 cronjobs for the next 3 levels respectively. These are ASCII text files.
-* Open cronjob_bandit22 since it is the next level that we are tackling. We find that there is a shell script within /usr/bin that redirects its output to /dev/null, a null device that discards the information written to it.
-* Open cronjob_bandit22.sh in /usr/bin and we find that the password to the next level has been also placed into a file t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv at /tmp, in addition to the usual location at /etc/bandit_pass where all the passwords are found.
+* First, navigate to /etc/cron.d as mentioned, and we can see that there are 3 cronjobs for the next 3 levels respectively. These are ASCII text files. Open cronjob_bandit22 since it is the next level that we are tackling.
+* One of the commands suggested for use in this level is crontab, and from the man page of crontab, we notice that the format of the crontab command fits the contents of the file cronjob_bandit22. The crontab file tells us that there is a shell script that is executed once every time the server is started up (as seen from @reboot).
+* Note: A crontab file has 5 fields at the start of the line to specify minute, hour, day of month, month and day of week, which is why we  notice that there is a second line in the crontab that is similar to the first line, except that there are 5 astericks instead of @reboot. The asterick operator specifies all possible values for the 5 fields.
+* Note: @reboot is a special string alongside other special strings such as @monthly, @weekly, @daily which denotes that the shell script would be run once every specified period. This increases readability instead of having to manually specify numbers for the 5 fields.
+* **Question: Why are 2 lines required in the crontab? Wouldn't it suffice to have the 2nd line only?**
+* From the crontab,  We find that there is a shell script within /usr/bin that redirects its output to /dev/null, a null device that discards the information written to it.
+* Open cronjob_bandit22.sh in /usr/bin and we find that the password to the next level has been also redirected into a file t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv at /tmp, in addition to the usual location at /etc/bandit_pass where all the passwords are found.
 * Password for Level 22: Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 
 **Bandit Level 22 → Level 23**  
