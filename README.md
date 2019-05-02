@@ -304,3 +304,11 @@ Good job getting a shell! Now hurry and grab the password for bandit27!
 * We find that there is a file bandit27-do in the working directory after being logged in, and that it is a setuid ELF 32-bit LSB executable. We had previously encountered this in level 19, and the same method is used to solve this level's challenge.
 * Command: ./bandit27-do cat /etc/bandit_pass/bandit27
 * Password for Level 27: 3ba3118a22e93127a4ed485be72ef5ea
+
+**Bandit Level 27 → Level 28**  
+**Key Takeaways**: learn how to use git commands, specifically the git clone command.  
+There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo. The password for the user bandit27-git is the same as for the user bandit27.  
+Clone the repository and find the password for the next level.
+* Create our own directory within the /tmp directory and clone the git repository to the directory. Go into repo, and open README for the password to the next level.
+* Command: git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
+* Password for Level 28: 0ef186ac70e04ea33b4c1853d2526fa2
