@@ -280,3 +280,20 @@ A daemon is listening on port 30002 and will give you the password for bandit25 
 * There are around 6 tries being attempted at each short interval, from the print statements that I inserted and which were thus printed, as well as seen from the grouping of the 3 types of statements seen in the result file. This means that we can have around 6 simultaneous processes at any point in time (limit on the number of forked processes, I am guessing).
 * <to-be-continued>
 * Password for Level 25: uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
+
+**Bandit Level 25 → Level 26**  
+**Key Takeaways**: learn more about the intricacies of the more command, as well as the capabilities of a text editor.  
+Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
+* After logging in to this level, we find that the SSH key to the next level is found in the current working directory. The old method (as used earlier in level 13) works: ssh -i bandit26.sshkey bandit26@localhost, which is why it is said that the logging in is fairly easy. However, our connection is immediately closed after that.
+* Recall in level 18 that we also had our connections similarly closed immediately after logging in, and we had to use a different shell to circumvent that problem. Let us try that method here: ssh -i bandit26.sshkey bandit26@localhost -t /bin/sh.
+* We find that the huge wall of text is similarly not found when successfully logged in, but the connection is still terminated.
+* Let's go back to reading the level goal and we see that a hint is to find out what the shell for user bandit26 is. A command for finding out the shell for a user is getent passwd <user> | cut -d : -f 7.
+* We run the command with user bandit24 and bandit25 and we see that the output is /bin/bash. Running the command with user bandit26 gives the output /usr/bin/showtext. We find that the file is a shell script.
+* The shell script shows that it sets the terminal to be of linux type (instead of the current xterm-256color), displays text.txt and then exits with status code 0. I was searching for the differences between the 2 terminal types to see if there was anything different but it turned out that I was looking at the wrong part of the shell script.
+* The key to solving this level is to know the parameters of the more command, particularly the interactive commands, since we cannot modify the shell script to insert additional parameters. I saw the parameter !command, which executes a command in a subshell but that was not quite the correct one.
+* We should be looking at the 'v' parameter, which starts up an editor at the current line. The point is to make the more command display part of the text.txt, and not the full thing, so that we can run our interactive command. To do so, we have to manually resize our terminal such that the entire text.txt cannot be displayed at one go.
+* With that, we are able to use an editor which opens text.txt. We are not able to edit text.txt, and it would be quite pointless to do so since the shell script only opens and displays the file contents. Crucially, we are able to do things (that I did not know), from within a text editor.
+* Type ":set shell=/bin/bash" (/bin/sh would also be fine), then press enter. Following that, type ":shell" and volia, we have our shell as user bandit26. I am guessing that since /bin/bash is not executed at login, the shell had not been set and thus the step is necessary. If we were to type ":shell" without the set command, the shell does not spawn for us.
+* Alternatively, instead of getting a shell, we can just grab the password by entering ":e /etc/bandit_pass/bandit26".
+* I would not have cleared this level if not for https://kongwenbin.com. On hindsight, I should have realised that it had to do with the more command because that was the command just before exit 0, which we wanted to avoid.
+* Password for Level 26: 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
