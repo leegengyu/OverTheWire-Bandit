@@ -297,3 +297,10 @@ Logging in to bandit26 from bandit25 should be fairly easy… The shell for user
 * Alternatively, instead of getting a shell, we can just directly grab the password by entering ":e /etc/bandit_pass/bandit26". But we have to note that the shell script would still run even when we log into the next level with a SSH key or with the password string. Thus, we need to know how to set the shell and spawn it.
 * I would not have cleared this level if not for https://kongwenbin.com. On hindsight, I should have realised that it had to do with the more command because that was the command just before exit 0, which we wanted to avoid.
 * Password for Level 26: 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+
+**Bandit Level 26 → Level 27**  
+**Key Takeaways**: revise how a setuid executable works.  
+Good job getting a shell! Now hurry and grab the password for bandit27!
+* We find that there is a file bandit27-do in the working directory after being logged in, and that it is a setuid ELF 32-bit LSB executable. We had previously encountered this in level 19, and the same method is used to solve this level's challenge.
+* Command: ./bandit27-do cat /etc/bandit_pass/bandit27
+* Password for Level 27: 3ba3118a22e93127a4ed485be72ef5ea
