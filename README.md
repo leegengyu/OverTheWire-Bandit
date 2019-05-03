@@ -312,3 +312,16 @@ Clone the repository and find the password for the next level.
 * Create our own directory within the /tmp directory and clone the git repository to the directory. Go into repo, and open README for the password to the next level.
 * Command: git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
 * Password for Level 28: 0ef186ac70e04ea33b4c1853d2526fa2
+
+**Bandit Level 28 → Level 29**  
+**Key Takeaways**: learn how to use git commands, specifically the git log/checkout/reset command.  
+There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.  
+Clone the repository and find the password for the next level.
+* This challenge's initial portion is largely similar to the previous level's. We will have to clone the git repository into our own directory, and open the README file found within.
+* The README file for the previous level directly revealed the password, but the password found in this level's README file is censored. There are 10 character 'x's stated, which is not exactly representative of the length of the password as well. The only useful thing that we derive out of it is that the password is censored.
+* We have only got the cloned repository to work with, but any cloned git repository contains a wealth of information. We can explore some of this information by executing git log, which shows us the commit logs. There were a total of 3 commits made - the first commit, the one with the password, and the final one being the censored version.
+* We will have to go to the second commit in order to get to the state of the README where there was the password in plaintext. To do so, we can either execute git checkout 186a1038cc54d1358d42d468cdc8e3cc28a93fcb (the long string is the unique id of the commit), or execute git reset --hard HEAD~1, which moves the HEAD (i.e. currently checked out commit) to the immediate next one.
+* Note: If there were a huge number of commits and we want to retrieve the files at the commit that is somewhere in the middle of the commit history, doing the checkout method might be better (else we might have to do some math to calculate the number of shifts in HEAD that we want).
+* Open README now and the password to the next level is found within the file.
+* Command: git clone ssh://bandit28-git@localhost/home/bandit28-git/repo
+* Password for Level 29: bbc96594b4e001778eee9975372716b2
