@@ -323,5 +323,17 @@ Clone the repository and find the password for the next level.
 * We will have to go to the second commit in order to get to the state of the README where there was the password in plaintext. To do so, we can either execute git checkout 186a1038cc54d1358d42d468cdc8e3cc28a93fcb (the long string is the unique id of the commit), or execute git reset --hard HEAD~1, which moves the HEAD (i.e. currently checked out commit) to the immediate next one.
 * Note: If there were a huge number of commits and we want to retrieve the files at the commit that is somewhere in the middle of the commit history, doing the checkout method might be better (else we might have to do some math to calculate the number of shifts in HEAD that we want).
 * Open README now and the password to the next level is found within the file.
-* Command: git clone ssh://bandit28-git@localhost/home/bandit28-git/repo
 * Password for Level 29: bbc96594b4e001778eee9975372716b2
+
+**Bandit Level 29 → Level 30**  
+**Key Takeaways**: learn how to use git commands, specifically the git branch and checkout command.  
+There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo. The password for the user bandit29-git is the same as for the user bandit29.  
+Clone the repository and find the password for the next level.
+* We start by using the same methods employed in the previous level on this one. After cloning the repository and opening README.md, we find that instead of censored passwords, we find that it is mentioned that there are no passwords in production.
+* We use git log to see how many commits there were but there is only 2 commits, and at no point in time was the password revealed then censored as was the case previously.
+* The hint to this level lies in the word "production". There is production code and there is development code. This reminds us of the fact that git has this one feature that allows developers to work on a common product at the same time and consolidate their code later - branches.
+* Execute git branch -a to see the list of all branches that there are in that repository. We start off as being in the master branch initially. There is also the sploits-dev branch which I went to explore first because the name of the branch seeemed to indicate the password would be there. Execute git checkout <branch name> to switch between branches.
+* It turns out that the README.md file in that branch was the same as the one in the master branch, and there wasn't anything noteworthy within the exploits folder as well.
+* Next, we checkout the dev branch, and volia, the password is found in the README.md file.
+* P.S. Remember that the first README we encountered said that the password was not in production? It is actually in development, its twin.
+* Password for Level 30: 5b90576bedb2cc04c86a9e924ce42faf
