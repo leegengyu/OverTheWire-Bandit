@@ -347,3 +347,15 @@ Clone the repository and find the password for the next level.
 * Subsequently I had issues with getting the password because I had tried to access the tag using the checkout way, by executing git checkout tags/secret, only to be greeted with the error message "fatal: reference is not a tree: tags/secret". I searched around and found that others encountered this error because of some forced actions (i.e. with --force parameter), or due to race conditions as well.
 * The way to get around this was to execute git show secret. Git show alone wouldn't reveal anything about the tag, but git show on tag names show the tag message (which is the password) and its referenced objects.
 * Password for Level 31: 47e603bb428404d265f59c42920d81e5
+
+**Bandit Level 31 → Level 32**  
+**Key Takeaways**: learn how to use git commands, specifically the git add, commit and push commands, as well as about git files such as .gitignore.  
+There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo. The password for the user bandit31-git is the same as for the user bandit31.  
+Clone the repository and find the password for the next level.
+* This level was more straightforward than I thought because the README gave clear instructions to solving the challenge, which is to push a file to the remote repository. Given that the repository is cloned by many who doing this challenge as well, I was thinking that the push would be rejected, but yet the password would be given.
+* First, create the file key.txt with the line "May I come in?". Then, execute git add ., git commit -am "Random message", and then you would supposedly execute git push.
+* However, we find that there is "nothing to commit" after executing the commit command, which led me to look into the .gitignore file, which contains a list of files and file extensions which would be ignored whenever files are staged to be pushed.
+* Note: The dot ('.') character in git add . meant that all files in the repository were to be checked for changes and staged to be pushed. We can specify individual files as well instead of the dot parameter.
+* Open .gitignore and we find that the only line in there is a rule that implies that all .txt files are ignored during the process above. Remove this line, run those 3 commands and the password is then revealed to us.
+* I learnt that there could be custom messages (such as the entire block of message in this case) displayed in the process of pushing, something which was unknown to me previously.
+* Password for Level 32: 56a9bf19c63d650ce78e6ec0354ee45e
