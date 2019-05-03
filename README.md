@@ -337,3 +337,13 @@ Clone the repository and find the password for the next level.
 * Next, we checkout the dev branch, and volia, the password is found in the README.md file.
 * P.S. Remember that the first README we encountered said that the password was not in production? It is actually in development, its twin.
 * Password for Level 30: 5b90576bedb2cc04c86a9e924ce42faf
+
+**Bandit Level 30 → Level 31**  
+**Key Takeaways**: learn how to use git commands, specifically the git tags and git show commands.  
+There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo. The password for the user bandit30-git is the same as for the user bandit30.  
+Clone the repository and find the password for the next level.
+* Using the same method of checking the git repositories' commit history and branches as done previously wouldn't work on this level. There is only 1 commit and 1 branch.
+* I had to now crack my head to think of what else git offered besides its commit and branch features, and remembered that versioning is done as part of projects hosted on Git as well. Execute git tag to see the list of tags available.
+* Subsequently I had issues with getting the password because I had tried to access the tag using the checkout way, by executing git checkout tags/secret, only to be greeted with the error message "fatal: reference is not a tree: tags/secret". I searched around and found that others encountered this error because of some forced actions (i.e. with --force parameter), or due to race conditions as well.
+* The way to get around this was to execute git show secret. Git show alone wouldn't reveal anything about the tag, but git show on tag names show the tag message (which is the password) and its referenced objects.
+* Password for Level 31: 47e603bb428404d265f59c42920d81e5
