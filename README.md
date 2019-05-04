@@ -359,3 +359,14 @@ Clone the repository and find the password for the next level.
 * Open .gitignore and we find that the only line in there is a rule that implies that all .txt files are ignored during the process above. Remove this line, run those 3 commands and the password is then revealed to us.
 * I learnt that there could be custom messages (such as the entire block of message in this case) displayed in the process of pushing, something which was unknown to me previously.
 * Password for Level 32: 56a9bf19c63d650ce78e6ec0354ee45e
+
+**Bandit Level 32 → Level 33**  
+**Key Takeaways**: learn how to escape from an upper-case shell.  
+After all this git stuff its time for another escape. Good luck!
+* After we have logged in, we find that there is a welcome message that greets us as part of the upper-case shell (GNU Bourne-Again SHell). Any command that you enter is converted to upper-case before being executed.
+* The message that states when a connection is closed is still in lower-case nonetheless.
+* The method used in Level 18 where we include a -t parameter to force pseudo-terminal allocation does not work here.
+* We can log in back to user bandit31 to find out what is in bandit32's home directory. We see that there is the bash logout file, as well as the bashrc and profile files. Lastly, we find that there is a setuid regular file with no read permissions for user bandit31.
+* Using the getent command which was first used in Level 25, we find that instead of a normal bash or sh being executed, the uppershell is executed from the get-go.
+* To be continued...
+* Password for Level 33: 
