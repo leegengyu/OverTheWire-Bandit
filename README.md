@@ -361,7 +361,7 @@ Clone the repository and find the password for the next level.
 * Password for Level 32: 56a9bf19c63d650ce78e6ec0354ee45e
 
 **Bandit Level 32 → Level 33**  
-**Key Takeaways**: learn how to escape from an upper-case shell.  
+**Key Takeaways**: learn how to escape from an upper-case shell, by examining the options of sh command.  
 After all this git stuff its time for another escape. Good luck!
 * After we have logged in, we find that there is a welcome message that greets us as part of the upper-case shell (GNU Bourne-Again SHell). Any command that you enter is converted to upper-case before being executed.
 * The message that states when a connection is closed is still in lower-case nonetheless.
@@ -370,5 +370,10 @@ After all this git stuff its time for another escape. Good luck!
 * I tried a method to bypass the bashrc and profile files which was adding "bash --noprofile --norc" after our normal ssh commmand but this did not work because they are apparently not read when the shell is spawned (this is my guess).
 * We can log in back to user bandit31 to find out what is in bandit32's home directory. We see that there is the bash logout file, as well as the bashrc and profile files. Lastly, we find that there is a *setuid regular file* with no read permissions for user bandit31.
 * The setuid file allows bandit32 to take on the permissions of the user bandit33 upon the file's execution.
-* To be continued...
-* Password for Level 33: 
+* After cracking my head for half a day on this, I found out that the solution to solving this challenge was a mere '$0'. I could not believe that the solution was staring right at me in the first page fo the manual of sh.
+* How $0 works is that the uppercase shell was likely to have been a shell supplied with additional parameters to convert all of our commands to uppercase. Executing $0 runs the shell again, without any parametes, thus giving us /bin/sh.
+* The rest of it is simple: since the uppercase file granted us privileges of bandit33 (check from whoami command), cd /etc/bandit_pass to get the password for the next level.
+* Password for Level 33: c9c3199ddf4121b10cf581a98d51caee
+
+**Bandit Level 33 → Level 34**  
+* We have reached the last level of the game - hurray!
