@@ -365,8 +365,10 @@ Clone the repository and find the password for the next level.
 After all this git stuff its time for another escape. Good luck!
 * After we have logged in, we find that there is a welcome message that greets us as part of the upper-case shell (GNU Bourne-Again SHell). Any command that you enter is converted to upper-case before being executed.
 * The message that states when a connection is closed is still in lower-case nonetheless.
-* The method used in Level 18 where we include a -t parameter to force pseudo-terminal allocation does not work here.
-* We can log in back to user bandit31 to find out what is in bandit32's home directory. We see that there is the bash logout file, as well as the bashrc and profile files. Lastly, we find that there is a setuid regular file with no read permissions for user bandit31.
+* The method used in Level 18 where we include a -t parameter to force pseudo-terminal allocation does not work here. If we use /bin/bash, there is no difference upon a successful login. However, when /bin/sh is used, we see an extra line of welcome message upon login, though at this point in time I am not sure of the implications of the extra line.
 * Using the getent command which was first used in Level 25, we find that instead of a normal bash or sh being executed, the uppershell is executed from the get-go.
+* I tried a method to bypass the bashrc and profile files which was adding "bash --noprofile --norc" after our normal ssh commmand but this did not work because they are apparently not read when the shell is spawned (this is my guess).
+* We can log in back to user bandit31 to find out what is in bandit32's home directory. We see that there is the bash logout file, as well as the bashrc and profile files. Lastly, we find that there is a *setuid regular file* with no read permissions for user bandit31.
+* The setuid file allows bandit32 to take on the permissions of the user bandit33 upon the file's execution.
 * To be continued...
 * Password for Level 33: 
