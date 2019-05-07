@@ -1,17 +1,17 @@
 # OverTheWire-Bandit
-This repository contains a walkthrough guide to completing the Bandit levels in the OverTheWire wargames.
+This repository contains a walkthrough guide to completing the [Bandit](http://overthewire.org/wargames/bandit/) levels in the OverTheWire wargames.
 
 This repository serves as:
-1) Documentation of my methods and thought process as I solve the Bandit level challenges from OverTheWire wargames.
+1) Documentation of my methods and thought process as I solve each level.
 2) Revision guide based on the key takeaways from solving each challenge.
 
 Each level of the walkthrough guide summarises the:
-1) Level Goal (taken verbatim from #insert link to OverTheWire page#)
+1) Level Goal (taken verbatim from what's given on the site)
 2) Key Takeaways
 3) Alternatives (if any)
 4) Common misconceptions (if any)
 
-**Tip**: For those using the Windows Command Prompt to ssh into each level's server, you can right-click on the cmd after copying the password unlocked from the previous level. The right-click pastes the password which was copied. Using the normal shortcut keys to paste (CTRL+V or SHIFT+INSERT) did not work for me.
+**Tip**: For those using the Windows Command Prompt to ssh into each level's server, you can right-click on the cmd after copying the password unlocked from the previous level. The right-click pastes the password which was copied. Using the normal shortcut keys to paste (CTRL + V or SHIFT + INSERT) did not work for me.
 
 # Walkthrough Guide
 **Bandit Level 0 → Level 1**  
@@ -29,8 +29,8 @@ The password for the next level is stored in a file called - located in the home
 **Bandit Level 2 → Level 3**  
 **Key Takeaways**: learn how to read files with spaces in its file name.  
 The password for the next level is stored in a file called spaces in this filename located in the home directory.  
-* Command: cat spaces\ in\ this\ filename
-* Alternatives: cat "spaces in this filename"
+* Command: `cat spaces\ in\ this\ filename`
+* Alternatives: `cat "spaces in this filename"`
 * File: spaces in this filename
 * Password for Level 3: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
@@ -43,7 +43,7 @@ The password for the next level is stored in a hidden file in the inhere directo
 **Bandit Level 4 → Level 5**  
 **Key Takeaways**: learn how to discover the type of a file, by using the file command.  
 The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.  
-* Command: file ./-file*
+* Command: `file ./-file*`
 * Note: human-readable file means a file with only ASCII text in this context.
 * File: -file07
 * Password for Level 5: koReBOKuIDDepwhWk7jZC0RTdopnAYKh
@@ -54,7 +54,7 @@ The password for the next level is stored in a file somewhere under the inhere d
 human-readable  
 1033 bytes in size  
 not executable  
-* Command: find -type f -readable ! -executable -size 1033c
+* Command: `find -type f -readable ! -executable -size 1033c`
 * Alternative: find -size 1033c (go straight for the most distinguishing property out of all the ones listed; this works in this context only because there was only 1 file which was 1033 bytes in size)
 * Note: suffix 'c' is found after 1033 to specify the units to be bytes. The command will not work if no units were stated.
 * Note: optional to include a '.' (dot) after the find command and before specifying the type, to indicate that all directories and files are being searched.
@@ -69,7 +69,7 @@ owned by user bandit7
 owned by group bandit6  
 33 bytes in size
 * Note: Since it is stated that the password is stored somewhere on the server, we must first navigate to the root folder. cd .. twice from the home directory, and then pwd to verify that we are in the root directory. We should only see the slash ('/') character from running pwd.
-* Command: find -user bandit7 -group bandit6 -size 33c
+* Command: `find -user bandit7 -group bandit6 -size 33c`
 * Note: There are a lot of files which match the given property, but all of these files (except one) cannot be accessed, as seen from the string of "Permission denied" messages displayed. Only one search result does not have this message.
 * File: ./var/lib/dpkg/info/bandit7.password
 * Password for Level 7: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
@@ -77,14 +77,14 @@ owned by group bandit6
 **Bandit Level 7 → Level 8**  
 **Key Takeaways**: learn how to search for a specific word within a file, by using the grep command.  
 The password for the next level is stored in the file data.txt next to the word millionth.  
-* Command: grep millionth data.txt
+* Command: `grep millionth data.txt`
 * File: data.txt
 * Password for Level 8: cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 
 **Bandit Level 8 → Level 9**  
 **Key Takeaways**: learn how to search within a file given a set of criteria, by using the sort and uniq commands, in addition to piping within the terminal.  
 The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.  
-* Command: cat data.txt | sort | uniq -u
+* Command: `cat data.txt | sort | uniq -u`
 * Note: -u argument indicates to print only the unique lines.
 * File: data.txt
 * Password for Level 9: UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
@@ -92,15 +92,15 @@ The password for the next level is stored in the file data.txt and is the only l
 **Bandit Level 9 → Level 10**   
 **Key Takeaways**: learn how to search for strings within a file that does not contain only ASCII characters, by using the strings and grep command.  
 The password for the next level is stored in the file data.txt in one of the few human-readable strings, beginning with several ‘=’ characters.  
-* Note: Running the file data.txt command tells us that the file is a data file, and does not contain only ASCII text. Hence, it was mentioned that there are only a few human-readable strings.
-* Command: strings data.txt | grep ===
+* Note: `file data.txt` tells us that the file is a data file, and does not contain only ASCII text. Hence, it was mentioned that there are only a few human-readable strings.
+* Command: `strings data.txt | grep ===`
 * File: data.txt
 * Password for Level 10: truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
 
 **Bandit Level 10 → Level 11**  
 **Key Takeaways**: learn how to decode base64 encoded data, using the base64 command.  
 The password for the next level is stored in the file data.txt, which contains base64 encoded data.  
-* Command: base64 -d data.txt
+* Command: `base64 -d data.txt`
 * Note: -d argument indicates decoding of data.
 * File: data.txt
 * Password for Level 11: IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
@@ -108,7 +108,7 @@ The password for the next level is stored in the file data.txt, which contains b
 **Bandit Level 11 → Level 12**  
 **Key Takeaways**: learn how to transform strings, using the tr command.  
 The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.  
-* Command: cat data.txt | tr A-Za-z N-ZA-Mn-za-m
+* Command: `cat data.txt | tr A-Za-z N-ZA-Mn-za-m`
 * Note: Inverted commas or square brackets around the parameters of the tr command are not required.
 * File: data.txt
 * Password for Level 12: 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
@@ -133,7 +133,7 @@ The password for the next level is stored in the file data.txt, which is a hexdu
 **Bandit Level 13 → Level 14**  
 **Key Takeaways**: learn how to log in to a server using a SSH (RSA) private key, using the ssh command.  
 The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.  
-* Command: ssh -i sshkey.private bandit14@localhost
+* Command: `ssh -i sshkey.private bandit14@localhost`
 * Note: -i parameter of ssh is referring to an identity file, from which the identity key (private key) for authentication is read.
 * Note: If I am not wrong, finding the IP address of localhost would require the execution of ifconfig, which is not found on the server. Thus, in place of knowing and using the localhost IP address, we can simply use the hostname itself.
 * File: sshkey.private
@@ -142,7 +142,7 @@ The password for the next level is stored in /etc/bandit_pass/bandit14 and can o
 **Bandit Level 14 → Level 15**  
 **Key Takeaways**: learn how to send data to another host, using the telnet command.  
 The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.  
-* Command: telnet localhost 30000, 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+* Command: `telnet localhost 30000`, `4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e`
 * Note: As mentioned in the previous level, the password for this level is stored in /etc/bandit_pass/bandit14.
 * Password for Level 14: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
 * Note: Telnet connection will be closed by host after 1 try of the password.
@@ -152,7 +152,7 @@ The password for the next level can be retrieved by submitting the password of t
 **Key Takeaways**: learn how to send data to another host using SSL encryption, using the openssl and s_client commands.  
 The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.  
 Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…
-* Command: openssl s_client -connect localhost:30001, BfMYroe26WYalil77FoDi9qh59eK5xNr
+* Command: `openssl s_client -connect localhost:30001`, `BfMYroe26WYalil77FoDi9qh59eK5xNr`
 * Note: **Not sure what the helpful note given is referring to**.
 * Note: Sending the password of the current level using the telnet command results in the connecting host closing its connection immediately.
 * Password for Level 16: cluFn7wTiGryunymYOu4RcffSxQluehd
@@ -160,21 +160,21 @@ Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof an
 **Bandit Level 16 → Level 17**  
 **Key Takeaways**: learn how to identify listening ports within a server, using the nmap, openssl and s_client command.  
 The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.  
-* Command 1: nmap -A -p 31000-32000 localhost
+* Command 1: `nmap -A -p 31000-32000 localhost`
 * Note: -A parameter to nmap enables OS and version detection, script scanning, and traceroute.
 * Note/Alternative: Executing nmap -p 31000-32000 localhost alone will show that only 1 TCP port, numbered 31790 is open and running unknown service. Run the same command with the -A parameter to confirm that the port speaks SSL. **Need to specify scan type used? e.g. -ST for TCP connect scan**
-* Command 2: openssl s_client -connect localhost:31790, cluFn7wTiGryunymYOu4RcffSxQluehd
+* Command 2: `openssl s_client -connect localhost:31790, cluFn7wTiGryunymYOu4RcffSxQluehd`
 * Note: SSH (RSA) private key for next level is given from the SSL connection. Copy and paste the key into a file created in /tmp directory.
-* Command 3: chmod 400 <SSH key filename>
+* Command 3: `chmod 400 <SSH key filename>`
 * Note: Command 3 sets the permissions of the key file to be readable only by the owner of the file (which is bandit16). Without changing the permissions of the SSH key file will result in the private key being ignored, because the server deems that the permissions for the file are too open, and requires that the file is not accessible to others.
-* Command 4: ssh -i <SSH key filename> bandit17@localhost
+* Command 4: `ssh -i <SSH key filename> bandit17@localhost`
 * Password for Level 17: unknown at this point in time (use command to log into Level 17's server)
 
 **Bandit Level 17 → Level 18**  
 **Key Takeaways**: learn how to compare the contents of 2 files, using the diff command.  
 There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new.  
 NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19.
-* Command: diff passwords.old passwords.new
+* Command: `diff passwords.old passwords.new`
 * Note: The output of the diff command is dependent on the order of the parameters supplied to the command. If passwords.new is the second parameter, the second string that is printed in the output is the password for the next level.
 * Password for Level 17: xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn (execute more /etc/bandit_pass/bandit17)
 * Password for Level 18: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
@@ -193,7 +193,7 @@ The password for the next level is stored in a file readme in the home directory
 **Bandit Level 19 → Level 20**  
 **Key Takeaways**: learn how to take on the role of another user, using a setuid binary.  
 To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
-* Command: ./bandit20-do cat /etc/bandit_pass/bandit20
+* Command: `./bandit20-do cat /etc/bandit_pass/bandit20`
 * Note: Executing file bandit20-do shows us that the file is a setuid ELF 32-bit LSB executable. Running the command allows us to take on the role of user bandit20 temporarily, because of the setuid (set user ID) executable.
 * Password for Level 20: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 
@@ -201,13 +201,13 @@ To gain access to the next level, you should use the setuid binary in the homedi
 **Key Takeaways**: learn how to open a listening port and communicate using it, using the nc command.  
 There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).  
 NOTE: Try connecting to your own network daemon to see if it works as you think.
-* Command: nc -z -v localhost 1-50000 (to find out what are the ports that are currently open)
+* Command: `nc -z -v localhost 1-50000` (to find out what are the ports that are currently open)
 * From the command, 7 ports are shown to be open. They are port number 22, 113, 30000, 30001, 30002, 30003 and 31790.
 * Command (on terminal A): nc -l -p 1234, GbKksEFF4yrVs6il55v6gwY5aVje5f0j 
 * Note: -l flag means listen mode.
 * Note: Any other port number besides 1234 can be used, so long as the number is not an existing port which was already shown to be open (i.e. not one of the 7 listed ones above).
-* Optional command (on terminal B): nc -z -v localhost 1234 (to test that the port 1234 had indeed been opened and is listening; However, if this command is used, then the listening side will end the connection after that and the command on terminal A has to be executed again)
-* Command (on terminal B): ./suconnect 1234
+* Optional command (on terminal B): `nc -z -v localhost 1234` (to test that the port 1234 had indeed been opened and is listening; However, if this command is used, then the listening side will end the connection after that and the command on terminal A has to be executed again)
+* Command (on terminal B): `./suconnect 1234`
 * The password for Level 21 will then be printed on terminal B.
 * I was initially confused by the level goal's description of "It then reads a line of text", thinking that reading a line of text is from the user input into the suconnect application.
 * **How this entire level actually works**: open a listening port of our choice and send level 20's password to the suconnect, who will verify that the current level's password is correct, before the setuid bit kicks in and permissions are temporarily elevated to user bandit21 to obtain the next level's password.
@@ -253,7 +253,7 @@ NOTE 2: Keep in mind that your shell script is removed once executed, so you may
 * Thus, create a shell script in a directory of your choice under /tmp. Similar to Level 22, the idea is that we copy the password file from /etc/bandit_pass to our own directory, but with the help of a cron job. While it does technically count as creating your own shell script, I do not really think that that counts, because the script is virtually the same as the one used in the previous level.
 * There are only 2 lines required in the script we create: #!/bin/bash and cat /etc/bandit_pass/bandit24 > /tmp/<your_directory>/<your_file_name>. Set the script to be executable. All of the other lines are redundant - we do not actually require the print statement (which is only for debugging and learning purposes) nor the variables.
 * Another crucial thing to do is to set /tmp/<your_directory> to be writeable by bandit24. This is because bandit24 will be running the shell script and the folder which we just created would not be originally writeable by other users. For convenience sake, I did a chmod 777.
-* Copy this shell script to /var/spool/bandit24.
+* Copy this shell script to `/var/spool/bandit24`.
 * Sit back and wait for a few minutes. Our shell script will be taken in by the spool, who will execute then delete it.
 * The password is now sitting in /tmp/<your_directory>/<your_file_name>.
 * Note: Using the same method of modifying $myname in Level 22 will not work. After the file has been copied to the /tmp directory, opening the file will not give the password, but "Yeah, that isn't going to work.  t. lucid" instead. I'm not sure how they made this message appear instead.
@@ -272,7 +272,7 @@ A daemon is listening on port 30002 and will give you the password for bandit25 
 * We will work with the idea of establishing a connection for each 4-digit attempt. Thus, what we want is to execute nc localhost 30002 each time, and then send a string of the password for level 24 plus our 4-digit guess. This guess would have a range [0000, 9999].
 * We will generate our 4-digit number using a for-loop (can be done with a while-loop as well).
 * Thus, our shell script code is: for pin in 0000..9999; do; echo UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $pin | nc localhost 30002 >> result &; done. Create the shell script within our own directory in /tmp and set the shell script to be executeable.
-* Credits go to https://blogcompsci.wordpress.com for this piece of code because I could not think of a way to speed up the brute-force process. The crucial part that does the fast-forwarding is the ampersand (&) symbol, which puts the nc process in the background so the next iteration can start, without having to wait for the current nc process to terminate, as pointed out by the author of that site.
+* Credits go to [blogcompsci](https://blogcompsci.wordpress.com) for this piece of code because I could not think of a way to speed up the brute-force process. The crucial part that does the fast-forwarding is the ampersand (&) symbol, which puts the nc process in the background so the next iteration can start, without having to wait for the current nc process to terminate, as pointed out by the author of that site.
 * If we were to manually connect to 30002 and do a manual 4-digit attempt, we would realise that it takes awhile for the connection to timeout after our initial attempt. Having our shell script to automate launching one connection at a time takes way too long.
 * I timed the duration required for the entire script (full range of 4-digit attempts) to run with the ampersand "hack" and it took only 25 minutes, and it would have been shorter if we set some condition to stop the script upon getting the correct one. Alas, we did not know what message would be printed even if we got the correct 4-digit pin.
 * After the shell script is done running, the results of each attempt of brute-forcing was written to the file result. Most of what you see within is either the initial prompt by the pincode checker, the invalid attempt message, or the timeout message.
@@ -293,16 +293,16 @@ Logging in to bandit26 from bandit25 should be fairly easy… The shell for user
 * The key to solving this level is to know the parameters of the more command, particularly the interactive commands, since we cannot modify the shell script to insert additional parameters. I saw the parameter !command, which executes a command in a subshell but that was not quite the correct one.
 * We should be looking at the 'v' parameter, which starts up the Vim editor at the current line. The point is to make the more command display part of the text.txt, and not the full thing, so that we can run our interactive command. To do so, we have to manually resize our terminal such that the entire text.txt cannot be displayed at one go.
 * With that, we are able to use Vim to proceed which opens text.txt. We are not able to edit text.txt, and it would be quite pointless to do so since the shell script only opens and displays the file contents. Crucially, we are able to do things (that I did not know), from within a text editor like Vim (not sure about other text editors). **Vim has a feature that allows us to run scripts and commands inside it.**
-* Type ":set shell=/bin/bash" (/bin/sh would also be fine), then press enter. Following that, type "!sh" or ":shell" to spawn our shell as user bandit26. I am guessing that since /bin/bash is not executed at login, the shell had not been set and thus the step is necessary. If we were to type ":shell" without the set command, the shell does not spawn for us.
+* Type `:set shell=/bin/bash` (/bin/sh would also be fine), then press enter. Following that, type `!sh` or `:shell` to spawn our shell as user bandit26. I am guessing that since /bin/bash is not executed at login, the shell had not been set and thus the step is necessary. If we were to type ":shell" without the set command, the shell does not spawn for us.
 * Alternatively, instead of getting a shell, we can just directly grab the password by entering ":e /etc/bandit_pass/bandit26". But we have to note that the shell script would still run even when we log into the next level with a SSH key or with the password string. Thus, we need to know how to set the shell and spawn it.
-* I would not have cleared this level if not for https://kongwenbin.com. On hindsight, I should have realised that it had to do with the more command because that was the command just before exit 0, which we wanted to avoid.
+* I would not have cleared this level if not for [kongwenbin](https://kongwenbin.com). On hindsight, I should have realised that it had to do with the more command because that was the command just before exit 0, which we wanted to avoid.
 * Password for Level 26: 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
 
 **Bandit Level 26 → Level 27**  
 **Key Takeaways**: revise how a setuid executable works.  
 Good job getting a shell! Now hurry and grab the password for bandit27!
 * We find that there is a file bandit27-do in the working directory after being logged in, and that it is a setuid ELF 32-bit LSB executable. We had previously encountered this in level 19, and the same method is used to solve this level's challenge.
-* Command: ./bandit27-do cat /etc/bandit_pass/bandit27
+* Command: `./bandit27-do cat /etc/bandit_pass/bandit27`
 * Password for Level 27: 3ba3118a22e93127a4ed485be72ef5ea
 
 **Bandit Level 27 → Level 28**  
@@ -310,7 +310,7 @@ Good job getting a shell! Now hurry and grab the password for bandit27!
 There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo. The password for the user bandit27-git is the same as for the user bandit27.  
 Clone the repository and find the password for the next level.
 * Create our own directory within the /tmp directory and clone the git repository to the directory. Go into repo, and open README for the password to the next level.
-* Command: git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
+* Command: `git clone ssh://bandit27-git@localhost/home/bandit27-git/repo`
 * Password for Level 28: 0ef186ac70e04ea33b4c1853d2526fa2
 
 **Bandit Level 28 → Level 29**  
@@ -320,7 +320,7 @@ Clone the repository and find the password for the next level.
 * This challenge's initial portion is largely similar to the previous level's. We will have to clone the git repository into our own directory, and open the README file found within.
 * The README file for the previous level directly revealed the password, but the password found in this level's README file is censored. There are 10 character 'x's stated, which is not exactly representative of the length of the password as well. The only useful thing that we derive out of it is that the password is censored.
 * We have only got the cloned repository to work with, but any cloned git repository contains a wealth of information. We can explore some of this information by executing git log, which shows us the commit logs. There were a total of 3 commits made - the first commit, the one with the password, and the final one being the censored version.
-* We will have to go to the second commit in order to get to the state of the README where there was the password in plaintext. To do so, we can either execute git checkout 186a1038cc54d1358d42d468cdc8e3cc28a93fcb (the long string is the unique id of the commit), or execute git reset --hard HEAD~1, which moves the HEAD (i.e. currently checked out commit) to the immediate next one.
+* We will have to go to the second commit in order to get to the state of the README where there was the password in plaintext. To do so, we can either execute `git checkout 186a1038cc54d1358d42d468cdc8e3cc28a93fcb` (the long string is the unique id of the commit), or execute `git reset --hard HEAD~1`, which moves the HEAD (i.e. currently checked out commit) to the immediate next one.
 * Note: If there were a huge number of commits and we want to retrieve the files at the commit that is somewhere in the middle of the commit history, doing the checkout method might be better (else we might have to do some math to calculate the number of shifts in HEAD that we want).
 * Open README now and the password to the next level is found within the file.
 * Password for Level 29: bbc96594b4e001778eee9975372716b2
@@ -332,7 +332,7 @@ Clone the repository and find the password for the next level.
 * We start by using the same methods employed in the previous level on this one. After cloning the repository and opening README.md, we find that instead of censored passwords, we find that it is mentioned that there are no passwords in production.
 * We use git log to see how many commits there were but there is only 2 commits, and at no point in time was the password revealed then censored as was the case previously.
 * The hint to this level lies in the word "production". There is production code and there is development code. This reminds us of the fact that git has this one feature that allows developers to work on a common product at the same time and consolidate their code later - branches.
-* Execute git branch -a to see the list of all branches that there are in that repository. We start off as being in the master branch initially. There is also the sploits-dev branch which I went to explore first because the name of the branch seeemed to indicate the password would be there. Execute git checkout <branch name> to switch between branches.
+* Execute `git branch -a` to see the list of all branches that there are in that repository. We start off as being in the master branch initially. There is also the sploits-dev branch which I went to explore first because the name of the branch seeemed to indicate the password would be there. Execute `git checkout <branch name>` to switch between branches.
 * It turns out that the README.md file in that branch was the same as the one in the master branch, and there wasn't anything noteworthy within the exploits folder as well.
 * Next, we checkout the dev branch, and volia, the password is found in the README.md file.
 * P.S. Remember that the first README we encountered said that the password was not in production? It is actually in development, its twin.
@@ -343,7 +343,7 @@ Clone the repository and find the password for the next level.
 There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo. The password for the user bandit30-git is the same as for the user bandit30.  
 Clone the repository and find the password for the next level.
 * Using the same method of checking the git repositories' commit history and branches as done previously wouldn't work on this level. There is only 1 commit and 1 branch, and the README file only said "just an epmty file... muahaha" (it did not even tell us the username unlike the previous levels - not that we don't know it anyway). I guess the only hint that we could extract on hindsight is that the password was not to be found in a README file.
-* I had to now crack my head to think of what else git offered besides its commit and branch features, and remembered that versioning is done as part of projects hosted on Git as well. Execute git tag to see the list of tags available.
+* I had to now crack my head to think of what else git offered besides its commit and branch features, and remembered that versioning is done as part of projects hosted on Git as well. Execute `git tag` to see the list of tags available.
 * Subsequently I had issues with getting the password because I had tried to access the tag using the checkout way, by executing git checkout tags/secret, only to be greeted with the error message "fatal: reference is not a tree: tags/secret". I searched around and found that others encountered this error because of some forced actions (i.e. with --force parameter), or due to race conditions as well.
 * The way to get around this was to execute git show secret. Git show alone wouldn't reveal anything about the tag, but git show on tag names show the tag message (which is the password) and its referenced objects.
 * Password for Level 31: 47e603bb428404d265f59c42920d81e5
@@ -353,7 +353,7 @@ Clone the repository and find the password for the next level.
 There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo. The password for the user bandit31-git is the same as for the user bandit31.  
 Clone the repository and find the password for the next level.
 * This level was more straightforward than I thought because the README gave clear instructions to solving the challenge, which is to push a file to the remote repository. Given that the repository is cloned by many who doing this challenge as well, I was thinking that the push would be rejected, but yet the password would be given.
-* First, create the file key.txt with the line "May I come in?". Then, execute git add ., git commit -am "Random message", and then you would supposedly execute git push.
+* First, create the file key.txt with the line "May I come in?". Then, execute `git add .`, `git commit -am "Random message"`, and then you would supposedly execute `git push`.
 * However, we find that there is "nothing to commit" after executing the commit command, which led me to look into the .gitignore file, which contains a list of files and file extensions which would be ignored whenever files are staged to be pushed.
 * Note: The dot ('.') character in git add . meant that all files in the repository were to be checked for changes and staged to be pushed. We can specify individual files as well instead of the dot parameter.
 * Open .gitignore and we find that the only line in there is a rule that implies that all .txt files are ignored during the process above. Remove this line, run those 3 commands and the password is then revealed to us.
@@ -367,13 +367,13 @@ After all this git stuff its time for another escape. Good luck!
 * The message that states when a connection is closed is still in lower-case nonetheless.
 * The method used in Level 18 where we include a -t parameter to force pseudo-terminal allocation does not work here. If we use /bin/bash, there is no difference upon a successful login. However, when /bin/sh is used, we see an extra line of welcome message upon login, though at this point in time I am not sure of the implications of the extra line.
 * Using the getent command which was first used in Level 25, we find that instead of a normal bash or sh being executed, the uppershell is executed from the get-go.
-* I tried a method to bypass the bashrc and profile files which was adding "bash --noprofile --norc" after our normal ssh commmand but this did not work because they are apparently not read when the shell is spawned (this is my guess).
+* I tried a method to bypass the bashrc and profile files which was adding `bash --noprofile --norc` after our normal ssh commmand but this did not work because they are apparently not read when the shell is spawned (this is my guess).
 * We can log in back to user bandit31 to find out what is in bandit32's home directory. We see that there is the bash logout file, as well as the bashrc and profile files. Lastly, we find that there is a *setuid regular file* with no read permissions for user bandit31.
 * The setuid file allows bandit32 to take on the permissions of the user bandit33 upon the file's execution.
-* After cracking my head for half a day on this, I found out that the solution to solving this challenge was a mere '$0'. I could not believe that the solution was staring right at me in the first page fo the manual of sh.
+* After cracking my head for half a day on this, I found out that the solution to solving this challenge was a mere `$0`. I could not believe that the solution was staring right at me in the first page fo the manual of sh.
 * How $0 works is that the uppercase shell was likely to have been a shell supplied with additional parameters to convert all of our commands to uppercase. Executing $0 runs the shell again, without any parametes, thus giving us /bin/sh.
 * The rest of it is simple: since the uppercase file granted us privileges of bandit33 (check from whoami command), cd /etc/bandit_pass to get the password for the next level.
 * Password for Level 33: c9c3199ddf4121b10cf581a98d51caee
 
 **Bandit Level 33 → Level 34**  
-* We have reached the last level of the game - hurray!
+* We have reached the last level of the game (for now) - hurray!
